@@ -1,0 +1,8 @@
+---
+version: "3"
+vars:
+  PROVISION_DIR: "{{.ROOT_DIR}}/provision"
+  ANSIBLE_DIR: "{{.PROVISION_DIR}}/kubernetes/servers"
+
+includes:
+  pv: .taskfiles/Ansible/Tasks.yml
