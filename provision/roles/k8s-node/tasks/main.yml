@@ -1,0 +1,26 @@
+---
+# tasks file for k8s-node
+- name: Initialize
+  debug:
+    msg: "Testing, 1, 2, 3"
+  tags:
+    - debug
+
+- name: Create directories for local storage
+  ansible.builtin.file:
+    path: "{{ item }}"
+    owner: root
+    group: root
+    mode: "0755"
+    state: directory
+  loop: "{{ storage_directories }}"
+
+- name: Run RKE2 role
+  ansible.builtin.include_role:
+    name: lablabs.rke2
+  vars:
+    rke2_download_kubeconf: true
+
+- include_tasks: firewall.yml
+  tags:
+    - debug

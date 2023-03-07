@@ -1,0 +1,5 @@
+---
+# vars file for k8s-node
+
+storage_directories:
+  - "/mnt/data/keycloak/postgresql"
