@@ -13,7 +13,11 @@
   ansible.builtin.include_role:
     name: lablabs.rke2
   vars:
+    rke2_version: v1.25.7+rke2r1
     rke2_download_kubeconf: true
+    rke2_additional_sans:
+      - 10.159.81.2
+      - kube.skullcow.church
 
 - include_tasks: firewall.yml
   tags:
