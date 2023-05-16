@@ -1,0 +1,14 @@
+version: "3"
+
+tasks:
+  install-flux:
+    desc: Install flux
+    dir: "{{.ROOT_DIR}}"
+    cmds:
+      - kubectl apply --server-side --kustomize ./kubernetes/bootstrap/flux --kubeconfig "{{.KUBECONFIG}}" --insecure-skip-tls-verify
+      - sops --decrypt kubernetes/bootstrap/flux/age-key.sops.yaml | kubectl apply --kubeconfig "{{.KUBECONFIG}}" --insecure-skip-tls-verify -f -
+      - sops --decrypt kubernetes/bootstrap/flux/github-access-token.sops.yaml | kubectl apply --kubeconfig "{{.KUBECONFIG}}" --insecure-skip-tls-verify -f -
+      - sops --decrypt kubernetes/flux/vars/cluster-secrets.sops.yaml | kubectl apply --kubeconfig "{{.KUBECONFIG}}" --insecure-skip-tls-verify -f -
+      - kubectl apply -f kubernetes/flux/vars/cluster-settings.yaml --kubeconfig "{{.KUBECONFIG}}" --insecure-skip-tls-verify
+    preconditions:
+      - test -f "{{.ANSIBLE_DIR}}/requirements.yml"

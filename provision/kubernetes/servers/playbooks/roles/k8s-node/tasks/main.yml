@@ -22,3 +22,7 @@
 - include_tasks: firewall.yml
   tags:
     - debug
+
+- include_tasks: flux-bootstrap.yml
+  tags:
+    - debug
