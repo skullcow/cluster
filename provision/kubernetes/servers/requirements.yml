@@ -9,6 +9,6 @@ collections:
   - name: community.sops
     version: 1.6.1
 roles:
-  - name: lablabs.rke2
-    src: https://github.com/lablabs/ansible-role-rke2.git
-    version: 1.20.0
+  - name: xanmanning.k3s
+    src: https://github.com/PyratLabs/ansible-role-k3s
+    version: v3.4.1

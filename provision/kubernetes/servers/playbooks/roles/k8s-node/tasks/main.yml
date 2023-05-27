@@ -9,20 +9,15 @@
     state: directory
   loop: "{{ storage_directories }}"
 
-- name: Run RKE2 role
+- name: Run k3s install role
   ansible.builtin.include_role:
-    name: lablabs.rke2
+    name: xanmanning.k3s
   vars:
-    rke2_version: v1.26.3+rke2r1
-    rke2_download_kubeconf: true
-    rke2_additional_sans:
-      - 10.159.81.2
-      - kube.skullcow.church
+    k3s_become: true
+# - include_tasks: firewall.yml
+#   tags:
+#     - debug
 
-- include_tasks: firewall.yml
-  tags:
-    - debug
-
-- include_tasks: flux-bootstrap.yml
-  tags:
-    - debug
+# - include_tasks: flux-bootstrap.yml
+#   tags:
+#     - debug
