@@ -10,3 +10,4 @@ resources:
   - ./nextcloud.yaml
   - ./weave-gitops.yaml
   - ./ingress-nginx.yaml
+  - ./jetstack.yaml
