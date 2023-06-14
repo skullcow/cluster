@@ -9,3 +9,4 @@ resources:
   - ./bjw-s.yaml
   - ./nextcloud.yaml
   - ./weave-gitops.yaml
+  - ./ingress-nginx.yaml
