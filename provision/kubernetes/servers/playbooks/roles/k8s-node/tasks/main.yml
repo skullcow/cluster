@@ -14,6 +14,16 @@
     name: xanmanning.k3s
   vars:
     k3s_become: true
+    k3s_server:
+      tls-san:
+        - 10.159.81.2
+        - kube.skullcow.church
+      docker: false
+      disable:
+        - traefik
+      write-kubeconfig-mode: "0644"
+      etcd-expose-metrics: true
+#
 # - include_tasks: firewall.yml
 #   tags:
 #     - debug
