@@ -28,7 +28,7 @@ spec:
         auth:
           postgresPassword: ${POSTGRESQL_PASSWORD}
     image:
-      tag: 15.3
+      tag: 15.3.0
     primary:
       persistence:
         enabled: true
