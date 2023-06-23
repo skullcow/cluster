@@ -26,5 +26,5 @@ spec:
       retries: 3
   values:
     installCRDs: true
-    serviceMonitor:
-      enabled: true
+    # serviceMonitor:
+    #   enabled: true
