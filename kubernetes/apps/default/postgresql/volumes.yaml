@@ -1,0 +1,31 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: postgresql-pv-nfs
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: postgresql-nfs
+  mountOptions:
+    - nfsvers=4.2
+  nfs:
+    path: "${NFS_PATH}/postgresql"
+    server: 127.0.0.1
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgresql-pvc
+  namespace: default
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: postgresql-nfs
+  volumeName: postgresql-pv-nfs
