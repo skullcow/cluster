@@ -1,0 +1,17 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: cloudnative-pg-pv-nfs
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: cloudnative-pg-nfs
+  mountOptions:
+    - nfsvers=4.2
+  nfs:
+    path: "${NFS_PATH}/cloudnative-pg"
+    server: ${NFS_HOST}
