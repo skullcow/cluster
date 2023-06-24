@@ -5,6 +5,7 @@ resources:
   - cert-manager
   - default
   - flux-system
+  - infra
   - kyverno
   - networking
   - utilities
