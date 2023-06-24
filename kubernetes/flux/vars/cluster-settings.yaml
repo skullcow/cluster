@@ -6,3 +6,4 @@ metadata:
   namespace: flux-system
 data:
   NFS_PATH: /storage/nfs
+  NFS_HOST: 127.0.0.1
