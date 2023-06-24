@@ -42,6 +42,7 @@ spec:
     envFrom:
       - secretRef:
           name: lldap-secret
+
     service:
       main:
         ports:
