@@ -13,7 +13,7 @@ spec:
           - secretRef:
               name: lldap-secret
         env:
-          - name: POSTGRES_SUPER_PASS
+          - name: INIT_POSTGRES_SUPER_PASS
             valueFrom:
               secretKeyRef:
                 name: postgresql-superuser
