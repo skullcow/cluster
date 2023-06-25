@@ -15,7 +15,7 @@ spec:
               secretKeyRef:
                 name: postgresql-superuser
                 key: password
-          - name: INIT_POSTGRES_DATABASE
+          - name: INIT_POSTGRES_DBNAME
             valueFrom:
               secretKeyRef:
                 name: authelia-secret
