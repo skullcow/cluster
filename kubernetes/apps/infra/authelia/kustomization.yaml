@@ -15,5 +15,6 @@ configMapGenerator:
     name: authelia-configmap
 generatorOptions:
   disableNameSuffixHash: true
-patches:
-  - path: patches/env.yaml
+patchesStrategicMerge:
+  - patches/env.yaml
+  - patches/postgresql.yaml
