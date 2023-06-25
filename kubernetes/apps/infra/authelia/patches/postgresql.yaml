@@ -1,0 +1,37 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: authelia
+  namespace: infra
+spec:
+  values:
+    initContainers:
+      init-db:
+        image: ghcr.io/onedr0p/postgres-init:14.8
+        env:
+          - name: INIT_POSTGRES_SUPER_PASS
+            valueFrom:
+              secretKeyRef:
+                name: postgresql-superuser
+                key: password
+          - name: INIT_POSTGRES_DATABASE
+            valueFrom:
+              secretKeyRef:
+                name: authelia-secret
+                key: AUTHELIA_STORAGE_POSTGRES_DATABASE
+          - name: INIT_POSTGRES_HOST
+            valueFrom:
+              secretKeyRef:
+                name: authelia-secret
+                key: AUTHELIA_STORAGE_POSTGRES_HOST
+          - name: INIT_POSTGRES_PASS
+            valueFrom:
+              secretKeyRef:
+                name: authelia-secret
+                key: AUTHELIA_STORAGE_POSTGRES_PASSWORD
+          - name: INIT_POSTGRES_USER
+            valueFrom:
+              secretKeyRef:
+                name: authelia-secret
+                key: AUTHELIA_STORAGE_POSTGRES_USERNAME
