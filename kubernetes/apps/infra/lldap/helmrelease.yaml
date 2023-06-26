@@ -64,7 +64,7 @@ spec:
           - hosts:
               - *host
     persistence:
-      config:
+      data:
         enabled: true
         server: ${NFS_HOST}
         path: ${NFS_PATH}/lldap
