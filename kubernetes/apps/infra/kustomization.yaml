@@ -4,4 +4,6 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - authelia
+  - grafana
   - lldap
+  - kube-prometheus-stack
