@@ -5,5 +5,5 @@ resources:
   - ./namespace.yaml
   - authelia
   - grafana
-  - lldap
   - kube-prometheus-stack
+  - lldap
