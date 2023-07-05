@@ -31,6 +31,11 @@ spec:
     adminUser:
       create: true
       username: admin
+    oidcSecret:
+      create: true
+      clientID: weave-gitops
+      issuerURL: https://auth.${ROOT_DOMAIN}
+      redirectURL: https://weave.${ROOT_DOMAIN}/oauth2/callback
     ingress:
       enabled: true
       className: nginx
@@ -58,3 +63,7 @@ spec:
       name: weave-gitops-secret
       valuesKey: adminPassword
       targetPath: adminUser.passwordHash
+    - kind: Secret
+      name: weave-gitops-secret
+      valuesKey: clientSecret
+      targetPath: oidcSecret.clientSecret
