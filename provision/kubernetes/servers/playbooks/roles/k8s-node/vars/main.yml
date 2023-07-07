@@ -3,3 +3,12 @@
 
 storage_directories:
   - "/mnt/data/keycloak/postgresql"
+
+# network interface for public connectivity
+public_interface: "enp3s0"
+
+# network interface for private connectivity
+private_interface: "netmaker"
+
+root_domain: "skullcow.church"
+kube_hostname: "kube.{{root_domain}}"

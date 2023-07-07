@@ -1,0 +1,47 @@
+---
+- name: Bootstrap k3s
+  hosts: angus
+
+  vars:
+    repo_url: "ssh://git@github.com/skullcow/cluster.git"
+    repo_local_dir: "{{ansible_env.HOME}}/cluster"
+    gitkey: "{{ansible_env.HOME}}/.ssh/gitkey"
+
+  tasks:
+    - name: "Bootstrap :: Ensure repo is checked out"
+      ansible.builtin.git:
+        repo: "{{ repo_url }}"
+        dest: "{{ repo_local_dir }}"
+        key_file: "{{ gitkey }}"
+        version: "main"
+    - name: "Bootstrap :: Ensure user has correct kubeconfig"
+      ansible.builtin.copy:
+        remote_src: yes
+        src: "/etc/rancher/k3s/k3s.yaml"
+        dest: "{{ ansible_env.HOME }}/.kube/config"
+        mode: "0644"
+
+    # "TODO: avoid using shell"
+    - name: "Bootstrap :: Run Flux install"
+      ansible.builtin.shell:
+        cmd: "kubectl apply --server-side --kustomize ./kubernetes/bootstrap/flux"
+        chdir: "{{ repo_local_dir }}"
+
+    - name: "Bootstrap :: Install secrets" 
+      ansible.builtin.shell:
+        cmd: "sops --decrypt {{ item }} | kubectl apply -f -"
+        chdir: "{{ repo_local_dir }}"
+      loop:
+        - "kubernetes/bootstrap/flux/age-key.sops.yaml"
+        - "kubernetes/bootstrap/flux/github-deploy-key.sops.yaml"
+        - "kubernetes/flux/vars/cluster-secrets.sops.yaml"
+    - name: "Bootstrap :: Apply cluster settings" 
+      ansible.builtin.shell:
+        cmd: "kubectl apply -f kubernetes/flux/vars/cluster-settings.yaml"
+        chdir: "{{ repo_local_dir }}"
+    - name: "Bootstrap :: Run initial flux manifests"
+      ansible.builtin.shell: 
+        cmd: "kubectl apply --server-side --kustomize ./kubernetes/flux/config"
+        chdir: "{{ repo_local_dir }}"
+    
+

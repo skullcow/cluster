@@ -15,4 +15,5 @@
     "editor.bracketPairColorization.enabled": true,
     "editor.guides.bracketPairs": "active",
     "editor.hover.delay": 1500,
+    "ansible.python.interpreterPath": "/usr/bin/python3",
 }

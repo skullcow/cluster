@@ -5,7 +5,7 @@
 
   tasks:
     - name: Run k8s-node role
-      ansible.builtin.include_role:
+      ansible.builtin.import_role:
         name: k8s-node
       tags:
         - debug

@@ -1,0 +1,24 @@
+---
+
+- name: "K3s setup :: check local ip addresses"
+  ansible.builtin.set_fact:
+    public_ip: "{{ ansible_facts[public_interface].ipv4.address }}"
+    private_ip: "{{ ansible_facts[private_interface].ipv4.address }}"
+
+# - name: "K3s setup :: test -- write ip address"
+#   ansible.builtin.debug:
+#     msg: "public ip: {{ public_ip }}, private ip: {{ private_ip }}"
+
+- name: "K3s setup :: run k3s role"
+  ansible.builtin.include_role:
+    name: xanmanning.k3s
+  vars:
+    k3s_become: true
+    k3s_server:
+      tls-san:
+        - "{{ public_ip }}"
+        - "{{ private_ip }}"
+        - "{{ kube_hostname }}"
+      disable:
+        - traefik
+      write-kubeconfig-mode: "0644"
