@@ -30,6 +30,9 @@ spec:
     controller:
       annotations:
         reloader.stakater.com/auto: "true"
+    dependsOn:
+      - name: postgresql
+        namespace: default
     image:
       repository: ghcr.io/lldap/lldap
       # TODO: Switch to release tag on next release

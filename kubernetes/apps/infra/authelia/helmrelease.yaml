@@ -27,6 +27,9 @@ spec:
     controller:
       annotations:
         reloader.stakater.com/auto: "true"
+    dependsOn:
+      - name: postgresql
+        namespace: default
     ingress:
       main:
         enabled: true
