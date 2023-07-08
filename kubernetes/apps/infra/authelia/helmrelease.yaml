@@ -15,6 +15,9 @@ spec:
         name: bjw-s
         namespace: flux-system
       interval: 15m
+  dependsOn:
+    - name: postgresql
+      namespace: default
   install:
     createNamespace: true
     remediation:
@@ -27,9 +30,6 @@ spec:
     controller:
       annotations:
         reloader.stakater.com/auto: "true"
-    dependsOn:
-      - name: postgresql
-        namespace: default
     ingress:
       main:
         enabled: true

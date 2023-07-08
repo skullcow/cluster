@@ -15,6 +15,9 @@ spec:
         name: prometheus-community
         namespace: flux-system
       interval: 15m
+  dependsOn:
+    - name: democratic-csi-local-hostpath
+      namespace: kube-system
   install:
     createNamespace: true
     remediation:
