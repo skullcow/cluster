@@ -1,14 +1,18 @@
 ---
 # vars file for k8s-node
-
-storage_directories:
-  - "/mnt/data/keycloak/postgresql"
+storage_root: "/storage/nfs"
+shares:
+  - "postgresql"
+  - "lldap"
+share_options: "127.0.0.1/24(rw,no_subtree_check,no_root_squash)"
 
 # network interface for public connectivity
 public_interface: "enp3s0"
 
 # network interface for private connectivity
 private_interface: "netmaker"
+
+network_name: "skullcow"
 
 root_domain: "skullcow.church"
 kube_hostname: "kube.{{root_domain}}"

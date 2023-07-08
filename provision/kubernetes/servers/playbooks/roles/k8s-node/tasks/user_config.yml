@@ -1,0 +1,10 @@
+---
+- name: "Users :: add admin users"
+  ansible.builtin.user:
+    name: "{{ item }}"
+    groups:
+      - sudo
+    state: present
+  loop:
+    - "nick"
+    - "beans"

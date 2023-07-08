@@ -1,0 +1,29 @@
+---
+- name: "Network :: Set hostname"
+  ansible.builtin.hostname:
+    name: angus
+
+- name: "Network :: Install netclient key"
+  ansible.builtin.apt_key:
+    url: https://apt.netmaker.org/gpg.key
+    state: present
+
+- name: "Network :: Install netclient repo"
+  ansible.builtin.apt_repository:
+    repo: "deb https://apt.netmaker.org stable main"
+    
+- name: "Network :: Install netclient"
+  ansible.builtin.apt:
+    name: netclient
+    state: present
+
+- name: "Network :: Check if netclient is joined"
+  ansible.builtin.shell:
+    cmd: netclient list | grep -i {{ network_name }} | wc -l
+  register: netclient_output
+
+- name: "Network :: Join netmaker network"
+  ansible.builtin.command:
+    cmd: "netclient join -t {{ join_token }}"
+  when: netclient_output.stdout != '1' and join_token is defined
+

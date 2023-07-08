@@ -1,6 +1,0 @@
----
-- name: "Install SOPS"
-  ansible.builtin.dnf:
-    name: "https://github.com/mozilla/sops/releases/download/v3.7.3/sops-3.7.3-1.x86_64.rpm"
-    disable_gpg_check: true #TODO: check into this
-    state: "present"

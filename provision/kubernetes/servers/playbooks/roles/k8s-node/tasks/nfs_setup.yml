@@ -1,0 +1,21 @@
+---
+- name: "NFS :: Install nfs server"
+  ansible.builtin.apt:
+    name: nfs-kernel-server
+    state: present
+
+- name: "NFS :: Create directories"
+  ansible.builtin.file:
+    name: "{{ storage_root }}/{{ item }}"
+    state: directory
+    owner: root
+    group: root
+    mode: "0777"
+  loop: "{{ shares }}"
+
+- name: "NFS :: Create export config line"
+  ansible.builtin.lineinfile:
+    path: "/etc/exports"
+    state: present
+    line: "{{ storage_root }} {{ share_options }}"
+  notify: "NFS :: Restart server"

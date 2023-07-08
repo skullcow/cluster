@@ -1,0 +1,7 @@
+---
+- name: "Prereqs :: Install utility packages"
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - "jq"

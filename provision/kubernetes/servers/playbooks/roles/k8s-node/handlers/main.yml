@@ -1,2 +1,7 @@
 ---
 # handlers file for k8s-node
+- name: "NFS :: Restart server"
+  ansible.builtin.service:
+    name: nfs-kernel-server
+    state: restarted
+    enabled: true
