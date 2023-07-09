@@ -15,9 +15,6 @@ spec:
         name: prometheus-community
         namespace: flux-system
       interval: 15m
-  dependsOn:
-    - name: democratic-csi-local-hostpath
-      namespace: kube-system
   install:
     createNamespace: true
     remediation:
@@ -57,7 +54,7 @@ spec:
         storageSpec:
           volumeClaimTemplate:
             spec:
-              storageClassName: local-hostpath
+              storageClassName: local-path
               resources:
                 requests:
                   storage: 20Gi
@@ -106,7 +103,7 @@ spec:
         storage:
           volumeClaimTemplate:
             spec:
-              storageClassName: local-hostpath
+              storageClassName: local-path
               resources:
                 requests:
                   storage: 1Gi
