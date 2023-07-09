@@ -70,7 +70,7 @@ spec:
     driver:
       config:
         driver: local-hostpath
-        instance_id: hydrogen
+        instance_id: angus
         local-hostpath:
           shareBasePath: "/var/lib/csi-local-hostpath"
           controllerBasePath: "/var/lib/csi-local-hostpath"
