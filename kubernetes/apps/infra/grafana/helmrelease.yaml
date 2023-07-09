@@ -86,12 +86,12 @@ spec:
           - name: Prometheus
             type: prometheus
             access: proxy
-            url: http://kube-prometheus-stack-prometheus.utilities:9090
+            url: http://kube-prometheus-stack-prometheus.infra:9090
             isDefault: true
           - name: Loki
             type: loki
             access: proxy
-            url: http://loki.utilities:3100
+            url: http://loki.infra:3100
     dashboards:
       default:
         # Ref: https://grafana.com/grafana/dashboards/1860-node-exporter-full/
